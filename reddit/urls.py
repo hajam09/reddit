@@ -22,15 +22,19 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('core.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('comments/', include('apps.comments.urls')),
+    path('communities/', include('apps.communities.urls')),
+    path('core/', include('apps.core.urls')),
+    path('posts/', include('apps.posts.urls')),
+    path('profiles/', include('apps.profiles.urls')),
+    path('reports/', include('apps.reports.urls')),
 ]
 
 if settings.DEBUG:
     import debug_toolbar
 
-    # Server statics and uploaded media
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
     urlpatterns += [
         path('__debug__/', include(debug_toolbar.urls)),
     ]
